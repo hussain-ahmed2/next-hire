@@ -16,6 +16,7 @@
     "mongoose": "^8.16.4",
     "motion": "^12.23.9",
     "next": "15.4.2",
+    "nprogress": "^0.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "zod": "^4.0.10"
@@ -25,6 +26,7 @@
     "@tailwindcss/postcss": "^4",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

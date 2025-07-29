@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Karla } from "next/font/google";
 import "./globals.css";
 import App from "./app";
+import ProgressBar from "@/components/ui/progress-bar";
 
 const karla = Karla({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${karla.className} antialiased`}>
+				<ProgressBar />
 				<App>{children}</App>
 			</body>
 		</html>
