@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Role, IUser } from "@/types/user";
 import LogoutButton from "../logout-button";
 import HoverPrefetchLink from "../ui/hover-prefetch-link";
+import Link from "next/link";
 
 export default function MobileMenu({ user }: { user: IUser | null }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -49,9 +50,9 @@ export default function MobileMenu({ user }: { user: IUser | null }) {
 				animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : "100%" }}
 				transition={{ duration: 0.3 }}
 				className="fixed top-16 left-0 right-0 bottom-0 flex flex-col bg-white z-50 container mx-auto max-w-7xl p-4 gap-2 shadow-md">
-				<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/">
+				<Link onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/">
 					Home
-				</HoverPrefetchLink>
+				</Link>
 				<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/jobs">
 					Jobs
 				</HoverPrefetchLink>
