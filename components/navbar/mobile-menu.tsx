@@ -1,11 +1,11 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Role, IUser } from "@/types/user";
 import LogoutButton from "../logout-button";
+import HoverPrefetchLink from "../ui/hover-prefetch-link";
 
 export default function MobileMenu({ user }: { user: IUser | null }) {
 	const [isOpen, setIsOpen] = useState(false);
@@ -49,42 +49,39 @@ export default function MobileMenu({ user }: { user: IUser | null }) {
 				animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : "100%" }}
 				transition={{ duration: 0.3 }}
 				className="fixed top-16 left-0 right-0 bottom-0 flex flex-col bg-white z-50 container mx-auto max-w-7xl p-4 gap-2 shadow-md">
-				<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/" onClick={handleClose}>
+				<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/">
 					Home
-				</Link>
-				<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/jobs" onClick={handleClose}>
+				</HoverPrefetchLink>
+				<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/jobs">
 					Jobs
-				</Link>
-				<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/employers" onClick={handleClose}>
+				</HoverPrefetchLink>
+				<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/employers">
 					Employers
-				</Link>
-				<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/candidates" onClick={handleClose}>
+				</HoverPrefetchLink>
+				<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/candidates">
 					Candidates
-				</Link>
+				</HoverPrefetchLink>
 				{user ? (
 					<>
-						<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/dashboard" onClick={handleClose}>
+						<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/dashboard">
 							Dashboard
-						</Link>
-						<span className="px-2">
-							<LogoutButton cb={handleClose} />
-						</span>
+						</HoverPrefetchLink>
+						<LogoutButton cb={handleClose} />
 					</>
 				) : (
 					<>
-						<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/login" onClick={handleClose}>
+						<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/login">
 							Login
-						</Link>
-						<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/register" onClick={handleClose}>
+						</HoverPrefetchLink>
+						<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/register">
 							Register
-						</Link>
+						</HoverPrefetchLink>
 					</>
 				)}
-
 				{user?.role === Role.Employer && (
-					<Link className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/post-job" onClick={handleClose}>
+					<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/post-job">
 						Post a Job
-					</Link>
+					</HoverPrefetchLink>
 				)}
 			</motion.div>
 		</>

@@ -4,7 +4,7 @@ import Navbar from "@/components/navbar/navbar";
 export default function App({ children }: { children: Readonly<React.ReactNode> }) {
 	return (
 		<>
-			<header className="fixed top-0 left-0 right-0 bg-white z-50">
+			<header className="fixed top-0 left-0 right-0 bg-white border-b border-neutral-200 z-50">
 				<Navbar />
 			</header>
 			<main className="flex flex-col min-h-[calc(100vh-4rem)] pt-16 container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</main>

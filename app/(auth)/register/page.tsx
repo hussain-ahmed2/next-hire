@@ -1,5 +1,5 @@
-import Link from "next/link";
 import RegisterForm from "./register-form";
+import HoverPrefetchLink from "@/components/ui/hover-prefetch-link";
 
 export default function RegisterPage() {
 	return (
@@ -10,9 +10,9 @@ export default function RegisterPage() {
 				<RegisterForm />
 				<p className="mt-2 text-center">
 					Already have an account?&nbsp;
-					<Link href="/login" className="text-purple-500 underline">
+					<HoverPrefetchLink href="/login" className="text-purple-500 underline">
 						Login
-					</Link>
+					</HoverPrefetchLink>
 				</p>
 			</div>
 		</div>

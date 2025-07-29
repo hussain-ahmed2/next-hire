@@ -1,5 +1,5 @@
-import Link from "next/link";
 import LoginForm from "./login-form";
+import HoverPrefetchLink from "@/components/ui/hover-prefetch-link";
 
 export default function LoginPage() {
 	return (
@@ -10,9 +10,9 @@ export default function LoginPage() {
 				<LoginForm />
 				<p className="mt-2 text-center">
 					Don&rsquo;t have an account?&nbsp;
-					<Link href="/register" className="text-purple-500 underline">
+					<HoverPrefetchLink href="/register" className="text-purple-500 underline">
 						Register
-					</Link>
+					</HoverPrefetchLink>
 				</p>
 			</div>
 		</div>

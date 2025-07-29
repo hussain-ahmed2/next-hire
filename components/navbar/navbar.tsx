@@ -1,29 +1,29 @@
-import Link from "next/link";
 import ProtectedNavLinks from "./protected-nav-links";
 import { Suspense } from "react";
+import HoverPrefetchLink from "../ui/hover-prefetch-link";
 
 export default function Navbar() {
 	return (
 		<nav className="flex items-center justify-between min-h-16 container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			{/* Logo */}
-			<Link href="/" className="text-2xl font-black text-purple-600">
+			<HoverPrefetchLink href="/" className="text-2xl font-black text-purple-600">
 				NextHire
-			</Link>
+			</HoverPrefetchLink>
 
 			{/* Desktop Menu */}
 			<nav className="hidden md:flex gap-4 items-center font-medium">
-				<Link className="hover:text-purple-600 transition duration-300" href="/">
+				<HoverPrefetchLink href="/" className="hover:text-purple-600 transition duration-300">
 					Home
-				</Link>
-				<Link className="hover:text-purple-600 transition duration-300" href="/jobs">
+				</HoverPrefetchLink>
+				<HoverPrefetchLink href="/jobs" className="hover:text-purple-600 transition duration-300">
 					Jobs
-				</Link>
-				<Link className="hover:text-purple-600 transition duration-300" href="/employers">
+				</HoverPrefetchLink>
+				<HoverPrefetchLink href="/employers" className="hover:text-purple-600 transition duration-300">
 					Employers
-				</Link>
-				<Link className="hover:text-purple-600 transition duration-300" href="/candidates">
+				</HoverPrefetchLink>
+				<HoverPrefetchLink href="/candidates" className="hover:text-purple-600 transition duration-300">
 					Candidates
-				</Link>
+				</HoverPrefetchLink>
 			</nav>
 
 			<Suspense fallback={<div>Loading...</div>}>
