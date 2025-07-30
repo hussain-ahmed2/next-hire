@@ -3,6 +3,7 @@ import { Karla } from "next/font/google";
 import "./globals.css";
 import App from "./app";
 import ProgressBar from "@/components/ui/progress-bar";
+import { Suspense } from "react";
 
 const karla = Karla({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${karla.className} antialiased`}>
-				<ProgressBar />
+				<Suspense fallback={null}>
+					<ProgressBar />
+				</Suspense>
 				<App>{children}</App>
 			</body>
 		</html>
