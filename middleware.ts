@@ -6,7 +6,7 @@ export async function middleware(request: NextRequest) {
 	const pathname = request.nextUrl.pathname;
 
 	// If no token and trying to access protected routes, redirect to /login
-	if (!token && pathname === "/dashboard") {
+	if (!token && pathname.startsWith("/dashboard")) {
 		return NextResponse.redirect(new URL("/login", request.url));
 	}
 
@@ -21,7 +21,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
 	// Middleware runs on these paths
-	matcher: ["/login", "/register", "/dashboard"],
+	matcher: ["/login", "/register", "/dashboard/:path*"],
 };
 
 const GUEST_ROUTES = ["/login", "/register"];
