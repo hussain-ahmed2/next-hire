@@ -67,7 +67,9 @@ export default function MobileMenu({ user }: { user: IUser | null }) {
 						<HoverPrefetchLink onClick={handleClose} className="p-2 hover:bg-purple-100 rounded transition duration-300" href="/dashboard">
 							Dashboard
 						</HoverPrefetchLink>
-						<LogoutButton cb={handleClose} />
+						<span className="p-2">
+							<LogoutButton cb={handleClose} />
+						</span>
 					</>
 				) : (
 					<>
