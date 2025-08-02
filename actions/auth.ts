@@ -3,9 +3,10 @@
 import connectDB from "@/lib/db";
 import { validateToken } from "@/lib/jwt";
 import User, { UserDocument } from "@/models/User";
+import { IUser } from "@/types/user";
 import { cookies } from "next/headers";
 
-export async function getUser() {
+export async function getUser(): Promise<IUser | null> {
 	try {
 		const cookieStore = await cookies();
 		const token = cookieStore.get("token")?.value || null;
@@ -20,7 +21,18 @@ export async function getUser() {
 		const user: UserDocument = await User.findById(id).select("-password");
 		if (!user) return null;
 
-		return { name: user.name, email: user.email, password: user.password, avatar: user.avatar, role: user.role, createdAt: user.createdAt, updatedAt: user.updatedAt };
+		return {
+			name: user.name,
+			email: user.email,
+			password: user.password,
+			avatar: user.avatar,
+			role: user.role,
+			createdAt: user.createdAt,
+			updatedAt: user.updatedAt,
+			slug: user.slug,
+			bio: user.bio,
+			_id: user._id.toString(),
+		};
 	} catch (error) {
 		console.error(error);
 		return null;
