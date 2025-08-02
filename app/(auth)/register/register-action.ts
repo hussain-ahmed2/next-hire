@@ -1,6 +1,7 @@
 "use server";
 
 import connectDB from "@/lib/db";
+import { generateSlugForUser } from "@/lib/slugify";
 import { getErrors, RegisterSchema, registerSchema } from "@/lib/validation-schema";
 import User, { UserDocument } from "@/models/User";
 import { cookies } from "next/headers";
@@ -39,8 +40,7 @@ export async function register(prevState: RegisterState, formData: FormData) {
 			};
 		}
 
-		const user: UserDocument = new User(data);
-		await user.save();
+		const user: UserDocument = await User.create(data);
 
 		if (!user) {
 			return {
@@ -50,6 +50,8 @@ export async function register(prevState: RegisterState, formData: FormData) {
 				form: data,
 			};
 		}
+
+		console.log(user);
 
 		const token = user.generateToken();
 
