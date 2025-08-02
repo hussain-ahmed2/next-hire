@@ -2,6 +2,7 @@ import { Schema, model, models, Document } from "mongoose";
 import bcrypt from "bcryptjs";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { IUser, Role } from "@/types/user";
+import { generateSlugForUser } from "@/lib/slugify";
 
 export type UserDocument = IUser & Document & { comparePassword: (password: string) => Promise<boolean>; generateToken: () => string; verifyToken: (token: string) => JwtPayload | string | null };
 
@@ -12,14 +13,22 @@ const userSchema = new Schema<UserDocument>(
 		password: { type: String, required: true },
 		avatar: { type: String, default: "" },
 		role: { type: String, enum: Object.values(Role), default: Role.Candidate },
+		bio: { type: String, default: "" },
+		slug: { type: String, unique: true, lowercase: true, trim: true },
 	},
 	{ timestamps: true }
 );
 
 userSchema.pre("save", async function (next) {
-	if (!this.isModified("password")) return next();
-	const salt = await bcrypt.genSalt(10);
-	this.password = await bcrypt.hash(this.password, salt);
+	if (this.isNew || this.isModified("name")) {
+		this.slug = await generateSlugForUser(this.name);
+	}
+
+	if (this.isModified("password")) {
+		const salt = await bcrypt.genSalt(10);
+		this.password = await bcrypt.hash(this.password, salt);
+	}
+
 	next();
 });
 
