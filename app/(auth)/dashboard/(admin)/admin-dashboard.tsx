@@ -1,6 +1,6 @@
 import { LayoutDashboard } from "lucide-react";
 import AdminLayout from "./admin-layout";
-import { getTotalApplications, getTotalCompanies, getTotalJobs, getTotalUsers } from "../dashboard-action";
+import { getTotalApplications, getTotalCompanies, getTotalJobs, getTotalUsers } from "./admin-dashboard-action";
 import { IUser } from "@/types/user";
 
 export default async function AdminDashboard({ user }: { user: IUser }) {
