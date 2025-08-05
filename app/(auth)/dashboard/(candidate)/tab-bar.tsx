@@ -3,7 +3,7 @@ import { TabType } from "../page";
 
 export default function TabBar({ tab }: { tab?: TabType }) {
 	return (
-		<div className="grid sm:grid-cols-4 border-b border-neutral-300">
+		<div className="grid sm:grid-cols-4 border-b border-neutral-300 font-medium">
 			<HoverPrefetchLink
 				className={`p-2 text-center transition duration-300 ${tab !== "edit-profile" && tab !== "applied-jobs" && tab !== "saved-jobs" ? "bg-purple-200" : "hover:bg-neutral-200"}`}
 				href="/dashboard?tab=profile">
