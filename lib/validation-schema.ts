@@ -6,11 +6,12 @@ const userSchema = z.object({
 	email: z.string().trim().email({ message: "Invalid email address." }),
 	password: z.string().trim().min(6, { message: "Password must be at least 6 characters." }).max(50, { message: "Password must be at most 50 characters." }),
 	avatar: z.string().trim().optional().default(""),
+	bio: z.string().trim().optional().default(""),
 	role: z.enum([Role.Admin, Role.Employer, Role.Candidate]).optional().default(Role.Candidate),
 });
 
 export const registerSchema = userSchema
-	.omit({ role: true, avatar: true })
+	.omit({ role: true, avatar: true, bio: true })
 	.extend({
 		confirmPassword: z.string().trim().min(6, { message: "Password must be at least 6 characters." }).max(50, { message: "Password must be at most 50 characters." }),
 	})
@@ -32,3 +33,52 @@ export const getErrors = (error: z.ZodError) => {
 
 	return result;
 };
+
+export const editProfileSchema = userSchema
+	.pick({
+		name: true,
+		email: true,
+		avatar: true,
+		bio: true,
+	})
+	.extend({
+		oldPassword: z.string().trim().optional(),
+		newPassword: z.string().trim().optional(),
+	})
+	.superRefine((data, ctx) => {
+		const { oldPassword, newPassword } = data;
+
+		// If oldPassword is provided, newPassword is required
+		if (oldPassword) {
+			if (!newPassword) {
+				ctx.addIssue({
+					path: ["newPassword"],
+					code: z.ZodIssueCode.custom,
+					message: "New password is required when old password is provided.",
+				});
+			} else {
+				// If newPassword is too short
+				if (newPassword.length < 6) {
+					ctx.addIssue({
+						path: ["newPassword"],
+						code: z.ZodIssueCode.too_small,
+						minimum: 6,
+						type: "string",
+						inclusive: true,
+						message: "New password must be at least 6 characters long.",
+					});
+				}
+
+				// If oldPassword and newPassword are the same
+				if (newPassword === oldPassword) {
+					ctx.addIssue({
+						path: ["newPassword"],
+						code: z.ZodIssueCode.custom,
+						message: "New password must be different from old password.",
+					});
+				}
+			}
+		}
+	});
+
+export type EditProfileSchema = z.infer<typeof editProfileSchema>;
