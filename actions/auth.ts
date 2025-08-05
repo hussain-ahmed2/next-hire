@@ -89,7 +89,9 @@ export async function updateUser(prevState: EditProfileState, formData: FormData
 			return { ...prevState, success: false, errors: { oldPassword: "Incorrect password" }, form: data };
 		}
 
-		const updatedUser = await User.findOneAndUpdate({ _id: user._id }, data, { new: true, upsert: true });
+		const updatedData = { ...data, password: data?.newPassword ? await bcrypt.hash(data.newPassword, await bcrypt.genSalt(10)) : undefined };
+
+		const updatedUser = await User.findOneAndUpdate({ _id: user._id }, updatedData, { new: true, upsert: true });
 
 		if (!updatedUser) {
 			return { ...prevState, success: false, errors: { email: "Failed to update user" }, form: data };
