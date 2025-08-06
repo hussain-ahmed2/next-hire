@@ -71,12 +71,12 @@ export type EditProfileState = {
 export async function updateUser(prevState: EditProfileState, formData: FormData) {
 	try {
 		const credentials = Object.fromEntries(formData) as EditProfileState["form"];
+		console.log(credentials);
 		const { success, data, error } = await editProfileSchema.safeParseAsync(credentials);
 
 		if (!success) {
 			return { ...prevState, success: false, errors: getErrors(error), form: credentials };
 		}
-
 		await connectDB();
 
 		const user = await getUser();

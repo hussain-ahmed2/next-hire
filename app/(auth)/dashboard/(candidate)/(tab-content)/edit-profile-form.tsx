@@ -70,10 +70,10 @@ export default function EditProfileForm({ user }: { user: IUser }) {
 				<Link href="/dashboard?tab=profile" className="btn text-center grow">
 					Cancel
 				</Link>
-				<button type="reset" className="btn-warning grow">
+				<button disabled={isPending} type="reset" className="btn-warning grow">
 					Reset
 				</button>
-				<button type="submit" className="btn-submit grow">
+				<button disabled={isPending} type="submit" className="btn-submit grow">
 					Update
 				</button>
 			</div>
