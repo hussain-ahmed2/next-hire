@@ -6,14 +6,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import EditUserModal from "./edit-user-modal";
+// import EditUserModal from "./edit-user-modal";
+import ViewUserModal from "./view-user-modal";
 
 export default async function UsersTable() {
 	const users = await getAllUsers();
 
 	return (
 		<div className="flex flex-col flex-1 bg-white">
-			<div className="w-full border shadow rounded-lg overflow-hidden">
+			<div className="w-full border shadow rounded-lg overflow-hidden animate-in fade-in-30">
 				<Table>
 					<TableHeader>
 						<TableRow>
@@ -50,19 +51,17 @@ export default async function UsersTable() {
 											</Button>
 										</DropdownMenuTrigger>
 										<DropdownMenuContent align="end">
-											<DropdownMenuItem asChild>
+											{/* <DropdownMenuItem asChild>
 												<EditUserModal user={user} />
-											</DropdownMenuItem>
+											</DropdownMenuItem> */}
 											<DropdownMenuItem asChild>
-												<Button variant="ghost" size="sm" className="w-full font-normal flex justify-start">
-													View
-												</Button>
+												<ViewUserModal user={user} />
 											</DropdownMenuItem>
-											<DropdownMenuItem className="text-red-600" asChild>
+											{/* <DropdownMenuItem className="text-red-600" asChild>
 												<Button variant="ghost" size="sm" className="w-full font-normal flex justify-start">
 													Delete
 												</Button>
-											</DropdownMenuItem>
+											</DropdownMenuItem> */}
 										</DropdownMenuContent>
 									</DropdownMenu>
 								</TableCell>

@@ -2,14 +2,10 @@ import { LayoutDashboard } from "lucide-react";
 import AdminLayout from "./admin-layout";
 import { getTotalApplications, getTotalCompanies, getTotalJobs, getTotalUsers } from "./admin-dashboard-action";
 import TotalCard, { TotalCardSkeleton } from "./total-card";
-import { getUser } from "@/actions/auth";
-import { redirect } from "next/navigation";
 import { Suspense } from "react";
+import { IUser } from "@/types/user";
 
-export default async function AdminDashboard() {
-	const user = await getUser();
-	if (!user) redirect("/logout");
-
+export default async function AdminDashboard({ user }: { user: IUser }) {
 	return (
 		<AdminLayout user={user} icon={<LayoutDashboard className="size-5 stroke-3" />} title="Dashboard">
 			<div className="flex-1">

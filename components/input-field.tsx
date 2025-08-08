@@ -18,7 +18,9 @@ export default function InputField({ name, label, type = "text", defaultValue = 
 				</label>
 			)}
 			<input
-				className={`p-2 border border-purple-200 rounded outline-none focus:ring-2 ${error ? "border-red-500 ring-red-200" : "focus:border-purple-500 ring-purple-200"}`}
+				className={`p-2 border border-purple-200 rounded outline-none focus:ring-2 transition duration-300 ${
+					error ? "border-red-500 ring-red-200" : "focus:border-purple-500 ring-purple-200"
+				}`}
 				type={type}
 				name={name}
 				id={name}
