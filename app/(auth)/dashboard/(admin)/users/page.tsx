@@ -2,6 +2,8 @@ import { Users } from "lucide-react";
 import AdminLayout from "../admin-layout";
 import { getUser } from "@/actions/auth";
 import { redirect } from "next/navigation";
+import UsersTable, { UsersTableSkeleton } from "./UsersTable";
+import { Suspense } from "react";
 
 export default async function page() {
 	const user = await getUser();
@@ -9,7 +11,11 @@ export default async function page() {
 
 	return (
 		<AdminLayout user={user} icon={<Users className="size-5 stroke-3" />} title="Users">
-			Users
+			<div className="flex flex-col flex-1">
+				<Suspense fallback={<UsersTableSkeleton />}>
+					<UsersTable />
+				</Suspense>
+			</div>
 		</AdminLayout>
 	);
 }
