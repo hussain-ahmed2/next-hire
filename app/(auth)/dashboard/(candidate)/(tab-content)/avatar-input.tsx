@@ -2,7 +2,7 @@
 
 import { ImagePlusIcon } from "lucide-react";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 export default function AvatarInput({ avatar }: { avatar?: string }) {
 	const [image, setImage] = useState(avatar || "/default-avatar.svg");
